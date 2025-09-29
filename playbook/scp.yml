@@ -14,7 +14,7 @@
     - name: Fetching file from source machine.....
       ansible.builtin.fetch:
         src: 'C:\sample\sample.txt'
-        dest: '/tmp/sample.txt'
+        dest: '/tmp/dest_sample.txt'
 
 - name: To Fetch file from controller node and copy to destination windows machine
   hosts: destination
@@ -30,5 +30,5 @@
   tasks:
     - name: Copying file to destination machine.....
       ansible.windows.win_copy:
-        src: '/tmp/sample.txt'
-        dest: 'C:/test/sample.txt'
+        src: '/tmp/dest_sample.txt'
+        dest: 'C:/test/'

@@ -32,4 +32,4 @@
       ansible.windows.win_copy:
         src: '\\rbwdcs.berrylabs.com\c$\sample\sample.txt'
         dest: 'C:\test\'
-        remote_src: true
+        remote_src: false

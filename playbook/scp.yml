@@ -31,4 +31,4 @@
     - name: Copying file to destination machine.....
       ansible.windows.win_copy:
         src: '/tmp/sample.txt'
-        dest: 'C:\test\sample.txt'
+        dest: 'C:/test/sample.txt'

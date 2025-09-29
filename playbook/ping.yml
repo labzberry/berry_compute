@@ -2,6 +2,14 @@
 - name: Test Kerberos Authentication
   hosts: windows
   gather_facts: false
+  vars:
+    ansible_connection: "{{ lookup('env', 'WINDOWS_CONNECTION') }}"
+    ansible_winrm_transport: "{{ lookup('env', 'WINDOWS_TRANSPORT') }}"
+    ansible_winrm_server_cert_validation: "{{ lookup('env', 'WINDOWS_CERT_VALIDATION') }}"
+    ansible_user: "{{ lookup('env', 'WINDOWS_USER') }}"
+    ansible_password: "{{ lookup('env', 'WINDOWS_PASSWORD') }}"
+    ansible_port: "{{ lookup('env', 'WINDOWS_PORT') }}"
+
   tasks:
 
     - name: Ensure windows host is reachable

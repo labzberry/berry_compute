@@ -30,6 +30,6 @@
   tasks:
     - name: Copying file to destination machine.....
       ansible.windows.win_copy:
-        src: '\\rbwdcs.berrylabs.com\c$\sample\sample.txt'
+        src: '/tmp/sample.txt'
         dest: 'C:\test\'
         remote_src: true

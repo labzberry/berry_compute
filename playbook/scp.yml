@@ -17,7 +17,7 @@
 #        dest: '/tmp/dest_sample.txt'
 
 - name: To Fetch file from controller node and copy to destination windows machine
-  hosts: destination
+  hosts: win
   gather_facts: no
   vars:
     ansible_connection: "{{ lookup('env', 'WINDOWS_CONNECTION') }}"

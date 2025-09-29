@@ -1,6 +1,6 @@
 ---
 - name: Test Kerberos Authentication
-  hosts: destination
+  hosts: win
   gather_facts: false
   vars:
     ansible_connection: "{{ lookup('env', 'WINDOWS_CONNECTION') }}"

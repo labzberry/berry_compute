@@ -1,0 +1,34 @@
+---
+- name: To Fetch file from source windows machine and copy to controller node
+  hosts: windows
+  gather_facts: no
+  vars:
+    ansible_connection: "{{ lookup('env', 'WINDOWS_CONNECTION') }}"
+    ansible_winrm_transport: "{{ lookup('env', 'WINDOWS_TRANSPORT') }}"
+    ansible_winrm_server_cert_validation: "{{ lookup('env', 'WINDOWS_CERT_VALIDATION') }}"
+    ansible_user: "{{ lookup('env', 'WINDOWS_USER') }}"
+    ansible_password: "{{ lookup('env', 'WINDOWS_PASSWORD') }}"
+    ansible_port: "{{ lookup('env', 'WINDOWS_PORT') }}"
+
+  tasks:
+    - name: Fetching file from source machine.....
+      ansible.builtin.fetch:
+        src: 'C:\sample\sample.txt'
+        dest: '/tmp/sample.txt'
+
+- name: To Fetch file from controller node and copy to destination windows machine
+  hosts: destination
+  gather_facts: no
+  vars:
+    ansible_connection: "{{ lookup('env', 'WINDOWS_CONNECTION') }}"
+    ansible_winrm_transport: "{{ lookup('env', 'WINDOWS_TRANSPORT') }}"
+    ansible_winrm_server_cert_validation: "{{ lookup('env', 'WINDOWS_CERT_VALIDATION') }}"
+    ansible_user: "{{ lookup('env', 'WINDOWS_USER') }}"
+    ansible_password: "{{ lookup('env', 'WINDOWS_PASSWORD') }}"
+    ansible_port: "{{ lookup('env', 'WINDOWS_PORT') }}"
+
+  tasks:
+    - name: Copying file to destination machine.....
+      ansible.windows.win_copy:
+        src: '/tmp/sample.txt'
+        dest: 'C:\sample.txt'

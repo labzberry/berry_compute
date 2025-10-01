@@ -1,0 +1,12 @@
+---
+- name: Copying file to UNC Path.....
+  ansible.windows.win_copy:
+    src: '\\rbwdcs\dctopunc\sample.txt'
+    dest: '\\rbwscm\oim\'
+    remote_src: yes
+    vars:
+      ansible_become: true
+      ansible_become_method: runas
+      ansible_become_user: "{{ lookup('env', 'WINDOWS_USER') }}"
+      ansible_become_password: "{{ lookup('env', 'WINDOWS_PASSWORD') }}"
+      ansible_become_flags: logon_type=new_credentials logon_flags=netcredentials_only

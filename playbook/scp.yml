@@ -1,5 +1,5 @@
 - name: To Copy file from UNC path
-  hosts: win
+  hosts: source
   gather_facts: no
   vars_files:
     - ../vars/auth.yml
@@ -14,7 +14,7 @@
 
     - name: Copying file to UNC Path.....
       ansible.windows.win_copy:
-        src: '{{ item.paths }}'
+        src: '{{ item.path }}'
         dest: '\\rbwscm\oim\'
         remote_src: yes
       vars:

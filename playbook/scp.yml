@@ -2,7 +2,7 @@
   hosts: all
   gather_facts: no
   vars_files:
-    - ../auth.yml
+    - ../vars/auth.yml
     
   tasks:
     - name: Copying file to UNC Path.....
@@ -11,4 +11,4 @@
         dest: '\\rbwscm\oim\'
         remote_src: yes
       vars_files:
-        - ../auth_become.yml
+        - ../vars/auth_become.yml

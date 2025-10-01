@@ -15,7 +15,7 @@
     - name: Copying file to destination machine.....
       ansible.windows.win_copy:
         src: '\\rbwdcs\dctopunc\sample.txt'
-        dest: 'C:\\test\\'
+        dest: '\\rbwscm\oim\'
         remote_src: yes
       vars:
         ansible_become: true

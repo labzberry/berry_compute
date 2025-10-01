@@ -18,9 +18,9 @@
         dest: 'C:\\test\\'
         remote_src: yes
       vars:
-      ansible_become: true
-      ansible_become_method: runas
-      ansible_become_user: '{{ ansible_user }}'
-      ansible_become_password: '{{ ansible_password }}'
-      ansible_become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+        ansible_become: true
+        ansible_become_method: runas
+        ansible_become_user: '{{ ansible_user }}'
+        ansible_become_password: '{{ ansible_password }}'
+        ansible_become_flags: logon_type=new_credentials logon_flags=netcredentials_only
 

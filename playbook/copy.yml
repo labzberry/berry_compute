@@ -10,10 +10,10 @@
     ansible_port: "{{ lookup('env', 'WINDOWS_PORT') }}"
 #    ansible_become_user: '{{ ansible_user }}'
 #    ansible_become_pass: '{{ ansible_password }}'
-
+#C:\\test\\
   tasks:
     - name: Copying file to destination machine.....
       ansible.windows.win_copy:
         src: '\\rbwdcs\dctopunc\sample.txt'
-        dest: 'C:\\test\\'
+        dest: '\\rbwdcs\berrydfs'
         remote_src: yes

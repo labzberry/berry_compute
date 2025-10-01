@@ -17,6 +17,7 @@
         src: '{{ item.path }}'
         dest: '\\rbwscm\oim\'
         remote_src: yes
+      loop: '{{ files.files }}'
       vars:
         ansible_become: true
         ansible_become_method: runas

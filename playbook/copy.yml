@@ -1,5 +1,5 @@
 - name: To Fetch file from controller node and copy to destination windows machine
-  hosts: win
+#  hosts: win
   gather_facts: no
   vars:
     ansible_connection: "{{ lookup('env', 'WINDOWS_CONNECTION') }}"

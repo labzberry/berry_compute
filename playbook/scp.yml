@@ -5,19 +5,25 @@
     - ../vars/auth.yml
     
   tasks:
-    - name: Display paths of all .txt files in dir
-      ansible.builtin.debug: msg={{ lookup('ansible.builtin.fileglob', '\\rbwdcs\dctopunc\"*.txt"') }}
+    - name: Find files with .log and .out extension using powershell wildcards
+      ansible.windows.win_find:
+        paths: '\\rbwdcs\dctopunc\'
+        patterns: ['*.txt']
+      register: files 
+#       patterns: ['*.log', '*.out']
 
-    - name: Copying file to UNC Path.....
-      ansible.windows.win_copy:
-        src: '\\rbwdcs\dctopunc\'
-        dest: '\\rbwscm\oim\'
-        remote_src: yes
-      with_fileglob:
-        - '*.txt'
+#    - name: Copying file to UNC Path.....
+#      ansible.windows.win_copy:
+#        src: '\\rbwdcs\dctopunc\'
+#        dest: '\\rbwscm\oim\'
+#        remote_src: yes
+#      with_fileglob:
+#        - '*.txt'
       vars:
         ansible_become: true
         ansible_become_method: runas
         ansible_become_user: '{{ ansible_user }}'
         ansible_become_password: '{{ ansible_password }}'
         ansible_become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+
+    - debug: files.msg 

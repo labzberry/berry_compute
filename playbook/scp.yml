@@ -1,5 +1,5 @@
 - name: To Copy file from UNC path
-  hosts: localhost
+  hosts: win
   gather_facts: no
   vars_files:
     - ../vars/auth.yml

@@ -1,34 +1,14 @@
----
-#- name: To Fetch file from source windows machine and copy to controller node
-#  hosts: windows
-#  gather_facts: no
-#  vars:
-#    ansible_connection: "{{ lookup('env', 'WINDOWS_CONNECTION') }}"
-#    ansible_winrm_transport: "{{ lookup('env', 'WINDOWS_TRANSPORT') }}"
-#    ansible_winrm_server_cert_validation: "{{ lookup('env', 'WINDOWS_CERT_VALIDATION') }}"
-#    ansible_user: "{{ lookup('env', 'WINDOWS_USER') }}"
-#    ansible_password: "{{ lookup('env', 'WINDOWS_PASSWORD') }}"
-#    ansible_port: "{{ lookup('env', 'WINDOWS_PORT') }}"
-
-#  tasks:
-#    - name: Fetching file from source machine.....
-#      ansible.builtin.fetch:
-#        src: 'C:\sample\sample.txt'
-#        dest: '/tmp/dest_sample.txt'
-
-- name: To Fetch file from controller node and copy to destination windows machine
-  hosts: win
+- name: To Copy file from UNC path
+  hosts: all
   gather_facts: no
-  vars:
-    ansible_connection: "{{ lookup('env', 'WINDOWS_CONNECTION') }}"
-    ansible_winrm_transport: "{{ lookup('env', 'WINDOWS_TRANSPORT') }}"
-    ansible_winrm_server_cert_validation: "{{ lookup('env', 'WINDOWS_CERT_VALIDATION') }}"
-    ansible_user: "{{ lookup('env', 'WINDOWS_USER') }}"
-    ansible_password: "{{ lookup('env', 'WINDOWS_PASSWORD') }}"
-    ansible_port: "{{ lookup('env', 'WINDOWS_PORT') }}"
-
+  vars_files:
+    - ../auth.yml
+    
   tasks:
-    - name: Copying file to destination machine.....
+    - name: Copying file to UNC Path.....
       ansible.windows.win_copy:
-        src: '/tmp/sample.txt'
-        dest: 'C:\'
+        src: '\\rbwdcs\dctopunc\*.txt'
+        dest: '\\rbwscm\oim\'
+        remote_src: yes
+      vars_files:
+        - ../auth_become.yml

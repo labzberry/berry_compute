@@ -5,6 +5,9 @@
     - ../vars/auth.yml
     
   tasks:
+    - name: Display paths of all .txt files in dir
+      ansible.builtin.debug: msg={{ lookup('ansible.builtin.fileglob', '\\rbwdcs\dctopunc\*.txt') }}
+
     - name: Copying file to UNC Path.....
       ansible.windows.win_copy:
         src: '{{ item }}'

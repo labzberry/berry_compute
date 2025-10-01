@@ -8,9 +8,14 @@
     ansible_user: "{{ lookup('env', 'WINDOWS_USER') }}"
     ansible_password: "{{ lookup('env', 'WINDOWS_PASSWORD') }}"
     ansible_port: "{{ lookup('env', 'WINDOWS_PORT') }}"
+    ansible_become_user: '{{ ansible_user }}'
+    ansible_become_pass: '{{ ansible_password }}'
 
   tasks:
     - name: Copying file to destination machine.....
       ansible.windows.win_copy:
         src: '\\rbwdcs\dctopunc\sample.txt'
         dest: 'C:\test\'
+      become: true
+      become_method: runas
+      become_flags: logon_type=new_credentials logon_flags=netcredentials_only

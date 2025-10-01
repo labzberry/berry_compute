@@ -10,11 +10,11 @@
 
     - name: Copying file to UNC Path.....
       ansible.windows.win_copy:
-        src: '{{ item }}'
+        src: '\\rbwdcs\dctopunc\'
         dest: '\\rbwscm\oim\'
         remote_src: yes
       with_fileglob:
-        - '\\rbwdcs\dctopunc\*.txt'
+        - '*.txt'
       vars:
         ansible_become: true
         ansible_become_method: runas

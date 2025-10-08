@@ -1,5 +1,10 @@
-plugin: community.vmware.vmware_host_inventory
+plugin: community.vmware.vmware_vm_inventory
 hostname: bvcewvvc9801.berrylabs.com
 username: "{{ lookup('env', 'VMWARE_USER') }}"
 password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
-validate_certs: false
+validate_certs: False
+with_tags: True
+groups:
+  power_state: true
+hostnames:
+  - config.name

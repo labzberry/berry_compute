@@ -15,7 +15,6 @@
         state: absent
         validate_certs: false
       loop: "{{ datastores_to_remove }}"
-
       delegate_to: localhost
 
     - name: Start SSH for an ESXi Host

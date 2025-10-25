@@ -1,0 +1,2 @@
+ansible_user: "{{ lookup('env', 'ESXI_USER') }}"
+ansible_password: "{{ lookup('env', 'ESXI_PASS') }}"

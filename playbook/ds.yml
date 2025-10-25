@@ -3,6 +3,7 @@
   gather_facts: no
   vars_files:
     - ../vars/lun.yml
+    - ../vars/esxauth.yml
     
   tasks:
     - name: Umount Datastores from a ESXi

@@ -21,7 +21,7 @@
       community.vmware.vmware_host_service_manager:
         hostname: "bvcewvvc9801.berrylabs.com"
         username: "{{ lookup('env', 'VMWARE_USER') }}"
-        password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
+        password: "{{ lookup('env', 'VMWARE_PASS') }}"
         esxi_hostname: '{{ inventory_hostname }}'
         service_name: TSM-SSH
         state: present
@@ -35,4 +35,5 @@
 
     - name: Detach Status
       debug:
+
         var: detach_status

@@ -9,10 +9,11 @@
       vmware_host_datastore:
         hostname: "bvcewvvc9801.berrylabs.com"
         username: "{{ lookup('env', 'VMWARE_USER') }}"
-        password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
+        password: "{{ lookup('env', 'VMWARE_PASS') }}"
         esxi_hostname: '{{ inventory_hostname }}'
         datastore_name: "{{ item }}"
         state: absent
         validate_certs: false
       loop: "{{ datastores_to_remove }}"
+
       delegate_to: localhost

@@ -30,7 +30,7 @@
       delegate_to: localhost
 
     - name: Detach a LUN from a ESXi host
-      shell: esxcli storage core device set -state=off -d {{ item }}
+      shell: esxcli storage core device set --state=off -d {{ item }}
       loop: "{{ luns_to_detach }}"
       register: detach_status
 
@@ -38,3 +38,4 @@
       debug:
 
         var: detach_status
+

@@ -2,10 +2,10 @@
   hosts: all
   gather_facts: no
   vars_files:
-    - ../vars/datastores_to_remove.yml
+    - ../vars/lun.yml
     
   tasks:
-    - name: Remove/Umount Datastores from a ESXi
+    - name: Umount Datastores from a ESXi
       vmware_host_datastore:
         hostname: "bvcewvvc9801.berrylabs.com"
         username: "{{ lookup('env', 'VMWARE_USER') }}"
@@ -17,3 +17,23 @@
       loop: "{{ datastores_to_remove }}"
 
       delegate_to: localhost
+
+    - name: Start SSH for an ESXi Host
+      community.vmware.vmware_host_service_manager:
+        hostname: "bvcewvvc9801.berrylabs.com"
+        username: "{{ lookup('env', 'VMWARE_USER') }}"
+        password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
+        esxi_hostname: '{{ inventory_hostname }}'
+        service_name: TSM-SSH
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Detach a LUN from a ESXi host
+      shell: esxcli storage core device set -state=off -d {{ item }}
+      loop: "{{ luns_to_detach }}"
+      register: detach_status
+
+    - name: Detach Status
+      debug:
+        var: detach_status

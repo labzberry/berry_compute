@@ -1,0 +1,63 @@
+---
+- name: to get tag information
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Get all tag information from vSphere
+      community.vmware.vmware_tag_info:
+        hostname: "bvcewvvc9801.berrylabs.com"
+        username: "administrator@vsphere.local"
+        password: "****"
+        validate_certs: no
+      register: tag
+    - debug:
+       # msg: "tag_name: {{ item.tag_name }}, tag_category_id: {{ item.tag_category_id }}"
+      #loop: "{{ tag.tag_info }}"
+       # msg: "{{ item.tag_name }}"
+     # loop: "{{ tag.tag_info }}"
+        var: tag.tag_info
+       # msg: "{{ tag.tag_info[].tag_name }}"
+
+---
+- name: to get tag information
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Get all tag information from vSphere
+      community.vmware.vmware_category_info:
+        hostname: "bvcewvvc9801.berrylabs.com"
+        username: "administrator@vsphere.local"
+        password: "*****"
+        validate_certs: no
+      register: category
+    - debug:
+       # msg: "tag_name: {{ item.tag_name }}, tag_category_id: {{ item.tag_category_id }}"
+      #loop: "{{ tag.tag_info }}"
+        msg: "{{ item.category_name }}"
+      loop: "{{ category.tag_category_info }}"
+       # var: category
+       # msg: "{{ tag.tag_info[].tag_name }}"
+
+---
+- name: to get tag information
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Get all tag information from vSphere
+      community.vmware.vmware_tag:
+        hostname: "bvcewvvc9801.berrylabs.com"
+        username: "administrator@vsphere.local"
+        password: "*****"
+        tag_name: GoldTier
+        tag_description: AppUUID
+        category_name: configcontrol
+        state: present
+        validate_certs: no
+      register: tag
+    - debug:
+       # msg: "tag_name: {{ item.tag_name }}, tag_category_id: {{ item.tag_category_id }}"
+      #loop: "{{ tag.tag_info }}"
+       # msg: "{{ item.tag_name }}"
+     # loop: "{{ tag.tag_info }}"
+        var: tag
+       # msg: "{{ tag.tag_info[].tag_name }}"
